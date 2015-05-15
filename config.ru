@@ -9,4 +9,4 @@ use Rack::TryStatic,
     urls: %w(/),
     try: %w(.html index.html /index.html)
 
-run -> { [404, { "Content-Type" => "text/html" }, ["Not Found"]  }
+run -> { [404, { "Content-Type" => "text/html" }, ["Not Found"] ]  }
