@@ -1,0 +1,51 @@
+baseurl: ""
+# url: "http://localhost:4000" # Development
+url: "http://webstuff.leods92.com" # Production
+source: ./_source
+
+#
+# Theme settings
+#
+paginate: 5
+paginate_path: "blog/page:num"
+
+theme:
+  title: "Web Stuff"
+  description: "Mostly about Ruby, HTML, CSS and JavaScript. Sometimes about hosting and OS X tips."
+  author: Leonardo Schlossmacher
+  author_website: http://leods92.com
+
+  header_text: "<p>Ruby, JavaScript, CSS, HTML, hosting, OS X.</p>"
+  header_text_feature_image:
+  footer_text: >
+    <p>Powered by <a href="http://jekyllrb.com">Jekyll</a> with modified <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>.</p>
+
+
+  # Scripts
+  google_analytics: UA-32253288-1
+  disqus_shortname: webstuff
+
+  # Localization strings
+  str_follow_on: "Follow on"
+  str_rss_follow: "Follow RSS feed"
+  str_email: "Email"
+  str_next: "Next"
+  str_prev: "Prev"
+  str_continue_reading: "Continue reading"
+
+  # Colours, typography and padding
+  # Open the "_sass > base" folder, and open "_variables.scss"
+  google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
+
+  # Post navigation
+  post_navigation: false
+
+
+#
+# Build settings
+#
+highlighter: pygments
+markdown: kramdown
+sass:
+  sass_dir: _sass
+  style: :compressed

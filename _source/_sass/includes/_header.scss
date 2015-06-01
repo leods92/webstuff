@@ -1,0 +1,28 @@
+.site-header {
+  @extend %padding-small;
+  background: $brand-color;
+  border-bottom: 1px solid $border-color;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  text-align: center;
+
+  a {
+    color: $header-link-color;
+  }
+
+  .site-title {
+    font-size: 2.5em;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .site-author {
+    // Without margin mobile looks bad.
+    // margin-bottom: 0;
+
+    & a {
+      color: $header-author-color;
+    }
+  }
+}

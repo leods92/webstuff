@@ -1,6 +1,0 @@
----
-layout: post
-title: "New Blog"
-date: 2015-05-14T21:54:35-03:00
----
-

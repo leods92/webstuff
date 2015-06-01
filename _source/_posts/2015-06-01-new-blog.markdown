@@ -1,0 +1,31 @@
+---
+layout: post
+title: "Blogging: another attempt"
+date: 2015-06-01T18:30:00-03:00
+---
+
+The internet is all about sharing, even when [it's not that important](http://knowyourmeme.com/memes/doge).
+Working as a web professional and being an open source user, I feel like I'm in huge sharing debt to the world.
+
+So that I could mitigate that (and give some love back ♥️), I've tried to write about things that usually made me waste time. However, eventually I would be in a hurry and end up forgetting about the blog.
+
+You know, it takes some time to open the blog platform (Wordpress, Tumblr, ...), find a nice picture, write the text, elaborate a sample code, review and then publish.
+
+Post ideas usually come from me starting to use a new tool or doing something in a different way. Then I stumble upon a problem and once that's fixed, I write on my week-plan: "write about XYZ on Sunday". Great!
+Then Monday comes and that post is still just planned. After rescheduling its writing a few times I lose the thread and give up.
+
+For this next attempt I wanted:
+
+- posting process to be simple and fast
+- to have content stored in a [VCS](http://en.wikipedia.org/wiki/Revision_control) for easy backups and revision
+- not to care about servers and hosting
+
+So here's what I'm using:
+
+- [Markdown](https://help.github.com/articles/markdown-basics/) to write posts
+- [Jekyll](http://jekyllrb.com/) to generate static files with layout and content
+- [Divshot](http://divshot.io) as a fast host and for an effortless deploy flow.
+
+Since I feel a bit ashamed of the old blog content, old posts won't be converted (but may be rewritten).
+
+We'll see how it goes. :)

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web Stuff</title>
+    <atom:link href="http://webstuff.leods92.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>http://webstuff.leods92.com/</link>
+    <description>Mostly about Ruby, HTML, CSS and JavaScript. Sometimes about hosting and OS X tips.</description>
+    <pubDate>Mon, 01 Jun 2015 19:44:25 -0300</pubDate>
+    
+      <item>
+        <title>Blogging: another attempt</title>
+        <link>http://webstuff.leods92.com/2015/06/01/new-blog.html</link>
+        <guid isPermaLink="true">http://webstuff.leods92.com/2015/06/01/new-blog.html</guid>
+        <description>&lt;p&gt;The internet is all about sharing, even when &lt;a href=&quot;http://knowyourmeme.com/memes/doge&quot;&gt;it’s not that important&lt;/a&gt;.
+Working as a web professional and being an open source user, I feel like I’m in huge sharing debt to the world.&lt;/p&gt;
+
+&lt;p&gt;So that I could mitigate that (and give some love back ♥️), I’ve tried to write about things that usually made me waste time. However, eventually I would be in a hurry and end up forgetting about the blog.&lt;/p&gt;
+
+&lt;p&gt;You know, it takes some time to open the blog platform (Wordpress, Tumblr, …), find a nice picture, write the text, elaborate a sample code, review and then publish.&lt;/p&gt;
+
+&lt;p&gt;Post ideas usually come from me starting to use a new tool or doing something in a different way. Then I stumble upon a problem and once that’s fixed, I write on my week-plan: “write about XYZ on Sunday”. Great!
+Then Monday comes and that post is still just planned. After rescheduling its writing a few times I lose the thread and give up.&lt;/p&gt;
+
+&lt;p&gt;For this next attempt I wanted:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;posting process to be simple and fast&lt;/li&gt;
+  &lt;li&gt;to have content stored in a &lt;a href=&quot;http://en.wikipedia.org/wiki/Revision_control&quot;&gt;VCS&lt;/a&gt; for easy backups and revision&lt;/li&gt;
+  &lt;li&gt;not to care about servers and hosting&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So here’s what I’m using:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/markdown-basics/&quot;&gt;Markdown&lt;/a&gt; to write posts&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; to generate static files with layout and content&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://divshot.io&quot;&gt;Divshot&lt;/a&gt; as a fast host and for an effortless deploy flow.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since I feel a bit ashamed of the old blog content, old posts won’t be converted (but may be rewritten).&lt;/p&gt;
+
+&lt;p&gt;We’ll see how it goes. :)&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Jun 2015 18:30:00 -0300</pubDate>
+      </item>
+    
+  </channel>
+</rss>
