@@ -4,8 +4,8 @@
     <title>Web Stuff</title>
     <atom:link href="http://webstuff.leods92.com/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://webstuff.leods92.com/</link>
-    <description>Mostly about Ruby, HTML, CSS and JavaScript. Sometimes about hosting and OS X tips.</description>
-    <pubDate>Mon, 01 Jun 2015 19:44:25 -0300</pubDate>
+    <description>Mostly about web technologies.</description>
+    <pubDate>Sat, 07 Jul 2018 12:57:05 +0200</pubDate>
     
       <item>
         <title>Blogging: another attempt</title>
@@ -41,7 +41,7 @@ Then Monday comes and that post is still just planned. After rescheduling its wr
 
 &lt;p&gt;We’ll see how it goes. :)&lt;/p&gt;
 </description>
-        <pubDate>Mon, 01 Jun 2015 18:30:00 -0300</pubDate>
+        <pubDate>Mon, 01 Jun 2015 23:30:00 +0200</pubDate>
       </item>
     
   </channel>

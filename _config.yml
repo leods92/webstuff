@@ -2,6 +2,7 @@ baseurl: ""
 # url: "http://localhost:4000" # Development
 url: "http://webstuff.leods92.com" # Production
 source: ./_source
+destination: ./docs
 
 #
 # Theme settings
