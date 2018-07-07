@@ -11,11 +11,11 @@ paginate_path: "blog/page:num"
 
 theme:
   title: "Web Stuff"
-  description: "Mostly about Ruby, HTML, CSS and JavaScript. Sometimes about hosting and OS X tips."
+  description: "Mostly about web technologies."
   author: Leonardo Schlossmacher
   author_website: http://leods92.com
 
-  header_text: "<p>Ruby, JavaScript, CSS, HTML, hosting, OS X.</p>"
+  header_text: "<p>Mostly about web technologies.</p>"
   header_text_feature_image:
   footer_text: >
     <p>Powered by <a href="http://jekyllrb.com">Jekyll</a> with modified <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>.</p>
