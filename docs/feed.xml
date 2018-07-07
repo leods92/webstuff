@@ -5,7 +5,124 @@
     <atom:link href="http://webstuff.leods92.com/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://webstuff.leods92.com/</link>
     <description>Mostly about web technologies.</description>
-    <pubDate>Sat, 07 Jul 2018 12:57:05 +0200</pubDate>
+    <pubDate>Sat, 07 Jul 2018 18:14:06 +0200</pubDate>
+    
+      <item>
+        <title>XHR's responseURL polyfill?</title>
+        <link>http://webstuff.leods92.com/2018/07/07/xhr-response-url-polyfill.html</link>
+        <guid isPermaLink="true">http://webstuff.leods92.com/2018/07/07/xhr-response-url-polyfill.html</guid>
+        <description>&lt;p&gt;It all started at work.&lt;/p&gt;
+
+&lt;p&gt;While developing a new feature, we realized we couldn’t use &lt;a href=&quot;https://github.com/transloadit/uppy&quot;&gt;Uppy&lt;/a&gt; as an up-loader on Internet Explorer 11.
+The problem we had was caused by Uppy’s &lt;a href=&quot;https://uppy.io/docs/aws-s3/&quot;&gt;S3 plug-in&lt;/a&gt; which relies on &lt;code&gt;XmlHttpResponse&lt;/code&gt;’s &lt;code&gt;responseURL&lt;/code&gt; which is not available in older browsers.&lt;/p&gt;
+
+&lt;h1 id=&quot;responseurl&quot;&gt;&lt;code&gt;responseURL&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;This &lt;code&gt;XmlHttpResponse&lt;/code&gt; property was introduced in the XHR spec in Feb 2014 by &lt;a href=&quot;https://github.com/whatwg/xhr/commit/0c9670185b79c255211881e086e05e7a99e65f06&quot;&gt;this commit&lt;/a&gt; because of &lt;a href=&quot;https://www.w3.org/Bugs/Public/show_bug.cgi?id=15417&quot;&gt;this bug&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Its value is a string representation of the response URL.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Isn’t it the same as the request URL?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;No.&lt;/p&gt;
+
+&lt;p&gt;The URLs you request might be redirected to other ones until you finally get a response. The last URL in a redirection-chain is the response URL.&lt;/p&gt;
+
+&lt;p&gt;In case there’s no redirection, yes, the request URL is the same as the response URL.&lt;/p&gt;
+
+&lt;h1 id=&quot;solving-the-problem&quot;&gt;Solving the problem&lt;/h1&gt;
+
+&lt;h2 id=&quot;reading-the-location-header&quot;&gt;Reading the &lt;code&gt;Location&lt;/code&gt; header&lt;/h2&gt;
+
+&lt;p&gt;I asked myself:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How about getting the URL from the &lt;code&gt;Location&lt;/code&gt; HTTP header?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The problem is that that header is never visible to &lt;code&gt;XmlHttpRequest&lt;/code&gt; instances.&lt;/p&gt;
+
+&lt;p&gt;From &lt;a href=&quot;https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#infrastructure-for-the-send%28%29-method&quot;&gt;the spec&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If the source origin and the origin of request URL are same origin &lt;strong&gt;transparently follow the redirect&lt;/strong&gt; while observing the same-origin request event rules.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;That means that if a redirect happens, only the information from the last URL in the redirection-chain will be available.
+If we could prevent the redirections from happening transparently, we could read and store the most recent &lt;code&gt;Location&lt;/code&gt; value and then handle the final redirection ourselves.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, that is not possible.&lt;/p&gt;
+
+&lt;h2 id=&quot;reading-a-custom-http-header&quot;&gt;Reading a custom HTTP header&lt;/h2&gt;
+
+&lt;p&gt;This is &lt;a href=&quot;https://github.com/github/fetch/blob/da07fa1dde1b6db238ef5567c1096dd9873e3ebf/README.md#obtaining-the-response-url&quot;&gt;the way&lt;/a&gt; GitHub’s fetch polyfill tackles the problem.&lt;/p&gt;
+
+&lt;p&gt;In order to work, their solution requires control over the HTTP server and the sending of a &lt;code&gt;X-Request-URL&lt;/code&gt; header.&lt;/p&gt;
+
+&lt;p&gt;In our case, we’re hitting an S3 server we don’t control; adding custom headers is probably not possible.&lt;/p&gt;
+
+&lt;h2 id=&quot;falling-back-to-the-request-url&quot;&gt;Falling back to the request URL&lt;/h2&gt;
+
+&lt;p&gt;To implement this in a “clean” way, I’d first detect if there were redirections.&lt;/p&gt;
+
+&lt;p&gt;If there were no redirections, I’d use the request URL as the response URL.&lt;/p&gt;
+
+&lt;p&gt;Otherwise, I’d throw an error because in this case it’d be impossible to know what the response URL is.&lt;/p&gt;
+
+&lt;p&gt;Detecting redirections is not possible with &lt;code&gt;XmlHttpRequest&lt;/code&gt; because there’s no property, method or (standard) header that determines whether a redirection happened.&lt;/p&gt;
+
+&lt;p&gt;Getting the request URL is also not so simple.
+While looking at MDN’s &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/XMLHTTPRequest#Constructor&quot;&gt;XMLHTTPRequest documentation&lt;/a&gt; and &lt;a href=&quot;https://github.com/chromium/chromium/blob/master/third_party/blink/renderer/core/xmlhttprequest/xml_http_request.cc&quot;&gt;Chromium’s source code&lt;/a&gt;, I noticed that there’s no public property or method which one can get the request URL from.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-i-moved-forward&quot;&gt;How I moved forward&lt;/h2&gt;
+
+&lt;p&gt;I couldn’t come up with a clean server-less fix for this issue.&lt;/p&gt;
+
+&lt;p&gt;The way I decided to move forward with was to fall back to the request URL when the &lt;code&gt;responseURL&lt;/code&gt; property is undefined.
+And I think that’s good enough.&lt;/p&gt;
+
+&lt;p&gt;Drawbacks to consider:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;If there’s a redirection and the code relies on the &lt;code&gt;responseURL&lt;/code&gt;, wrong things may happen; in this case, the response URL is not the same as the request URL.&lt;/li&gt;
+  &lt;li&gt;In order to retrieve the request URL, the URL must be saved somewhere accessible beforehand.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I still think it’s an appropriate solution for our case because:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;I cannot think of a situation in which S3 would redirect upload requests.&lt;/li&gt;
+  &lt;li&gt;IE11 support is currently inexistent so anything is better than nothing.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I’ve opened a PR fixing Uppy’s S3 plug-in’s issue.&lt;/p&gt;
+
+&lt;p&gt;Now I’m hoping that the maintainers accept it :P&lt;/p&gt;
+
+&lt;h1 id=&quot;polyfill&quot;&gt;Polyfill?&lt;/h1&gt;
+
+&lt;p&gt;While researching about this issue, I couldn’t find any polyfill.
+Because of that, I thought of writing one myself but I decided not to.&lt;/p&gt;
+
+&lt;p&gt;In my opinion, the solution I decided to move forward with would not be suitable for a polyfill; simply because it wouldn’t be 100% compliant with &lt;code&gt;responseURL&lt;/code&gt;’s spec.&lt;/p&gt;
+
+&lt;p&gt;I even imagined developers wasting their time with “weird issues” because of it.&lt;/p&gt;
+
+&lt;p&gt;So I decided to write this post instead and share as much information as I can with fellow developers. 🤗&lt;/p&gt;
+
+&lt;h1 id=&quot;additional-links&quot;&gt;Additional links&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/chromium/chromium/blob/master/third_party/WebKit/LayoutTests/http/tests/xmlhttprequest/responseURL.html&quot;&gt;Chromium’s &lt;code&gt;responseURL&lt;/code&gt; tests&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/8056277/how-to-get-response-url-in-xmlhttprequest&quot;&gt;Stack Overflow discussion&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/github/fetch/issues/443&quot;&gt;Fetch polyfill issue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/de/docs/Web/API/XMLHttpRequest/responseURL&quot;&gt;&lt;code&gt;responseURL&lt;/code&gt; compatibility list&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 07 Jul 2018 13:06:00 +0200</pubDate>
+      </item>
     
       <item>
         <title>Blogging: another attempt</title>
