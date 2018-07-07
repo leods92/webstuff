@@ -43,6 +43,13 @@ theme:
 
 
 #
+# Plugins
+#
+plugins:
+  - jekyll-paginate
+
+
+#
 # Build settings
 #
 highlighter: pygments
