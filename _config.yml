@@ -22,10 +22,6 @@ theme:
     <p>Powered by <a href="http://jekyllrb.com">Jekyll</a> with modified <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>.</p>
 
 
-  # Scripts
-  google_analytics: UA-32253288-1
-  disqus_shortname: webstuff
-
   # Localization strings
   str_follow_on: "Follow on"
   str_rss_follow: "Follow RSS feed"
