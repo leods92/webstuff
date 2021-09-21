@@ -74,9 +74,6 @@ article {
     text-align: center;
     width: 50%;
   }
-  a:hover {
-    @extend a.button:hover;
-  }
 
   #prev-post {
       float: left;
