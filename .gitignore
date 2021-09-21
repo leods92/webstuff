@@ -2,3 +2,5 @@
 .ink-cache
 .sass-cache
 .DS_Store
+vendor/bundle
+_source/.jekyll-cache/
