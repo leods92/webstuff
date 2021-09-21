@@ -10,7 +10,7 @@ destination: ./docs
 paginate: 5
 paginate_path: "blog/page:num"
 
-theme:
+web_stuff:
   title: "Web Stuff"
   description: "Mostly about web technologies."
   author: Leonardo Schlossmacher
